@@ -39,7 +39,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
+        withCredentials: true,  // This tells axios to send cookies
       });
 
       if (res.data.success) {

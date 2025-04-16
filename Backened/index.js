@@ -13,10 +13,11 @@ const app = express();
 
 //middleware
 app.use(cors({
-  origin: '*',
+  origin: ['https://job-portal-beige-six.vercel.app', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,  // This allows cookies to be sent with requests
+  optionsSuccessStatus: 200
 }));
 // allow all the origin
 app.use(express.json());
