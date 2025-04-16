@@ -7,12 +7,11 @@ import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-import { USER_API_END_POINT } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "@/redux/authSlice";
 
 const Signup = () => {
-  const {loading} = useSelector(store=>store.auth);
+  const { loading } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [input, setInput] = useState({
@@ -67,12 +66,16 @@ const Signup = () => {
 
     try {
       dispatch(setLoading(true));
-      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_USER_API_END_POINT}/register`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
 
       console.log("Server Response:", res.data);
 
@@ -85,8 +88,7 @@ const Signup = () => {
     } catch (error) {
       console.error("Signup failed!", error.response?.data || error.message);
       toast.error(error.response?.data?.message || "Signup failed!");
-    }
-    finally{
+    } finally {
       dispatch(setLoading(false));
     }
   };
